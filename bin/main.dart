@@ -9,21 +9,31 @@
 
 void main() {
   double totalDeCoelhos = 0;
-  double coelhosJovens = 1;
-  double coelhosAdultos = 1;
+  double coelhosJovens = 2;
+  double coelhosAdultos = 0;
   int mesAtual = 1;
 
   for (int meses = 24; mesAtual <= meses; mesAtual++) {
     // Lógica para replicação da população de coelhos
-    if (mesAtual <= 12) {
-      coelhosAdultos = coelhosAdultos * 2;
-      coelhosJovens = coelhosJovens * 2;
-      totalDeCoelhos = coelhosAdultos + coelhosJovens;
+    if (mesAtual > 12) {
+      // Lógica do predador
+      coelhosAdultos = coelhosAdultos * 0.25;
+      coelhosJovens = coelhosJovens * 0.25;
     }
 
+    coelhosAdultos += coelhosJovens;
+    coelhosJovens = coelhosAdultos;
+    totalDeCoelhos = coelhosAdultos + coelhosJovens;
+
     // Imprimir informações de log
-    print(
-      "Fim do Mês: $mesAtual. População de coelhos: $totalDeCoelhos. Jovens: $coelhosJovens. Adultos: $coelhosAdultos",
-    );
+    if (mesAtual <= 12) {
+      print(
+        "Fim do Mês: $mesAtual. População de coelhos: $totalDeCoelhos. Jovens: $coelhosJovens. Adultos: $coelhosAdultos",
+      );
+    } else {
+      print(
+        "Fim do Mês: $mesAtual. População de coelhos: $totalDeCoelhos. Jovens: $coelhosJovens. Adultos: $coelhosAdultos (Com predador)",
+      );
+    }
   }
 }
